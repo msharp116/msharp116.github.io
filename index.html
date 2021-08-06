@@ -1,0 +1,674 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<!--
+ *
+ *  AUTHOR: Mark Sharp
+ *  Date Created: July 7, 2021
+ *
+-->
+
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+	<!--Sets the web page's title and icon-->
+	<title>DnD character Creator UI</title>
+	<link rel="stylesheet" href="styles/normalize.css">
+	<link rel="stylesheet" href="styles/main.css">
+	<!-- <link rel="shortcut icon" href="images/favicon.ico"> -->
+</head>
+
+<body>
+
+	<!-- Prompts the user to provide a spreadsheet ID so that the rest of the page can get set up -->
+	<!-- <div class="initialPopup">
+		<div<
+	</div> -->
+
+	<header>
+		<p>Dummy Header</p>
+	</header>
+
+	<div class="navbar">
+		<!-- Displays the navigation menu-->
+		<div class="topnav" id="nav_menu">
+			<a class="active" href="javascript:void(0);" onclick="changeActive(this,1)">Character</a>
+			<a href="javascript:void(0);" onclick="changeActive(this,2)">Stats</a>
+			<a href="javascript:void(0);" onclick="changeActive(this,3);">Personal Characteristics</a> <!-- Name, age, hieght, weight, etc -->
+			<!-- <a href="#Magic">Magic</a> -->
+			<a href="javascript:void(0);" style="font-size:15px; float:right;" class="icon" onclick="expandTopNav(this)">&#9776;</a>
+			<a href="javascript:void(0);" id="settings" onclick="changeActive(this)">Settings</a>
+
+			<!-- <li><p>Ability Scores</p></li>
+			<li><p>Proficiencies</p></li>
+			<li><p>Feats</p></li> -->
+		</div>
+
+		<div class="topnav" id="charNav">
+			<a href="javascript:void(0);" class="active" onclick="changeActive(this);changeDisplayedPage('racePage')">Race</a>
+			<a href="javascript:void(0);" onclick="changeActive(this);changeDisplayedPage('classPage')">Class</a>
+			<a href="javascript:void(0);" onclick="changeActive(this);changeDisplayedPage('backgroundPage')">Background</a>
+			<a href="javascript:void(0);" onclick="changeActive(this);changeDisplayedPage('languagePage')">Languages</a>
+			<a href="javascript:void(0);" style="font-size:15px;" class="icon" onclick="expandTopNav(this)">&#9776;</a>
+		</div>
+
+		<div class="topnav" id="statNav" hidden>
+			<a href="javascript:void(0);" class="active" onclick="changeActive(this);changeDisplayedPage('abilityScoresPage')">Ability Scores</a>
+			<a href="javascript:void(0);" onclick="changeActive(this);changeDisplayedPage('skillsPage')">Skill Proficiencies</a>
+			<a href="javascript:void(0);" onclick="changeActive(this);changeDisplayedPage('featsPage')">Feats</a>
+			<a href="javascript:void(0);" style="font-size:15px;" class="icon" onclick="expandTopNav(this)">&#9776;</a>
+		</div>
+
+		<div class="topnav" id="personalNav" hidden>
+			<a href="javascript:void(0);" class="active" onclick="changeActive(this);changeDisplayedPage('generalInfoPage')">General Information</a>
+			<a href="javascript:void(0);" onclick="changeActive(this);changeDisplayedPage('historyPage')">Personal History</a>
+			<a href="javascript:void(0);" onclick="changeActive(this);changeDisplayedPage('relationPage')">Relationships</a>
+			<!-- TODO:Add this page back in later -->
+			<!-- <a href="javascript:void(0);" onclick="changeActive(this);changeDisplayedPage('miscPage')">Miscellaneous</a> -->
+			<a href="javascript:void(0);" style="font-size:15px;" class="icon" onclick="expandTopNav(this)">&#9776;</a>
+
+			<!-- Disabled, but left in for reference in the future. -->
+			<!-- <div class="dropdown">
+				<button class="dropbtn">Dropdown
+					<i class="fa fa-caret-down"></i>
+				</button>
+				<div class="dropdown-content">
+					<a href="#">Link 1</a>
+					<a href="#">Link 2</a>
+					<a href="#">Link 3</a>
+				</div>
+			</div> -->
+		</div>
+	</div>
+
+	<main>
+		<!-- TODO: Add in accesibility options for those using screen readers adding tabindex="0" role="button" aria-pressed="false"
+							 to the table row divs, but needs testing to see if there is more necessary.-->
+		<!-- TODO:  Go through these and figure out if activeTable can be removed for a more efficient solution -->
+		<div class="pageGroup" id="character" >
+			<div class="page activePage" id="racePage">
+				<div class="tableGroup activeTable" id="raceTables">
+					<div class="dynamicTable" id="raceTable">
+				    <div class="dTableHeader">
+		          <p class="tableName">Race</p>
+							<p class="raceAttr">Attributes</p>
+							<p class="sourceColumn">Source book</p>
+				    </div>
+		        <div class="dTableRow oddRow">
+		          <p class="col1">Race 1</p>
+		          <p class="col2">Attribute Text</p>
+		          <p class="col3">Player's Handbook</p>
+		        </div>
+		        <div class="dTableRow evenRow">
+		          <p class="col1">Race 2</p>
+		          <p class="col2">Attribute Text</p>
+		          <p class="col3">Player's Handbook</p>
+		        </div>
+						<div class="dTableRow oddRow">
+		          <p class="col1">Race 3</p>
+		          <p class="col2">Attribute Text</p>
+		          <p class="col3">Player's Handbook</p>
+		        </div>
+		        <div class="dTableRow evenRow">
+		          <p class="col1">Race 4</p>
+		          <p class="col2">Attribute Text</p>
+		          <p class="col3">Player's Handbook</p>
+		        </div>
+					</div>
+					<div class="dynamicTable" id="subraceTable">
+				    <div class="dTableHeader">
+		          <p class="tableName">Subrace</p>
+							<p class="raceAttr">Attributes</p>
+							<p class="sourceColumn">Source book</p>
+				    </div>
+		        <div class="dTableRow oddRow">
+		          <p class="col1">Variant 1</p>
+		          <p class="col2">Attribute Text</p>
+		          <p class="col3">Player's Handbook</p>
+		        </div>
+						<div class="dTableRow evenRow">
+		          <p class="col1">Variant 2</p>
+		          <p class="col2">Attribute Text</p>
+		          <p class="col3">Player's Handbook</p>
+		        </div>
+						<div class="dTableRow oddRow">
+		          <p class="col1">Variant 3</p>
+		          <p class="col2">Attribute Text</p>
+		          <p class="col3">Player's Handbook</p>
+		        </div>
+						<div class="dTableRow evenRow">
+		          <p class="col1">Variant 4</p>
+		          <p class="col2">Attribute Text</p>
+		          <p class="col3">Player's Handbook</p>
+		        </div>
+					</div>
+				</div>
+			</div>
+			<div class="page" id="classPage">
+				<div class="tableGroup" id="classTables">
+					<div class="dynamicTable" id="classTable">
+				    <div class="dTableHeader">
+		          <p class="tableName">Class</p>
+							<p class="raceAttr">Attributes</p>
+							<p class="sourceColumn">Source book</p>
+				    </div>
+		        <div class="dTableRow oddRow">
+		          <p class="col1">Class 1</p>
+		          <p class="col2">Attribute Text</p>
+		          <p class="col3">Player's Handbook</p>
+		        </div>
+		        <div class="dTableRow evenRow">
+		          <p class="col1">Class 2</p>
+		          <p class="col2">Attribute Text</p>
+		          <p class="col3">Player's Handbook</p>
+		        </div>
+						<div class="dTableRow oddRow">
+		          <p class="col1">Class 3</p>
+		          <p class="col2">Attribute Text</p>
+		          <p class="col3">Player's Handbook</p>
+		        </div>
+		        <div class="dTableRow evenRow">
+		          <p class="col1">Class 4</p>
+		          <p class="col2">Attribute Text</p>
+		          <p class="col3">Player's Handbook</p>
+		        </div>
+					</div>
+					<div class="dynamicTable" id="subclassTable">
+				    <div class="dTableHeader">
+		          <p class="tableName">Subclass</p>
+							<p class="raceAttr">Attributes</p>
+							<p class="sourceColumn">Source book</p>
+				    </div>
+		        <div class="dTableRow oddRow">
+		          <p class="col1">Subclass 1</p>
+		          <p class="col2">Attribute Text</p>
+		          <p class="col3">Player's Handbook</p>
+		        </div>
+						<div class="dTableRow evenRow">
+		          <p class="col1">Subclass 2</p>
+		          <p class="col2">Attribute Text</p>
+		          <p class="col3">Player's Handbook</p>
+		        </div>
+						<div class="dTableRow oddRow">
+		          <p class="col1">Subclass 3</p>
+		          <p class="col2">Attribute Text</p>
+		          <p class="col3">Player's Handbook</p>
+		        </div>
+						<div class="dTableRow evenRow">
+		          <p class="col1">Subclass 4</p>
+		          <p class="col2">Attribute Text</p>
+		          <p class="col3">Player's Handbook</p>
+		        </div>
+					</div>
+				</div>
+			</div>
+			<div class="page" id="backgroundPage">
+				<div class="tableGroup" id="backgroundTables">
+					<div class="dynamicTable" id="backgroundTable">
+				    <div class="dTableHeader">
+		          <p class="tableName">Background</p>
+							<p class="raceAttr">Attributes</p>
+							<p class="sourceColumn">Source book</p>
+				    </div>
+		        <div class="dTableRow oddRow">
+		          <p class="col1">Background 1</p>
+		          <p class="col2">Attribute Text</p>
+		          <p class="col3">Player's Handbook</p>
+		        </div>
+		        <div class="dTableRow evenRow">
+		          <p class="col1">Background 2</p>
+		          <p class="col2">Attribute Text</p>
+		          <p class="col3">Player's Handbook</p>
+		        </div>
+						<div class="dTableRow oddRow">
+		          <p class="col1">Background 3</p>
+		          <p class="col2">Attribute Text</p>
+		          <p class="col3">Player's Handbook</p>
+		        </div>
+		        <div class="dTableRow evenRow">
+		          <p class="col1">Background 4</p>
+		          <p class="col2">Attribute Text</p>
+		          <p class="col3">Player's Handbook</p>
+		        </div>
+					</div>
+				</div>
+			</div>
+			<div class="page" id="languagePage">
+				<div class="tableGroup" id="languageTables">
+					<div class="dynamicTable" id="languageTable">
+				    <div class="dTableHeader">
+		          <p class="tableName">Languages</p>
+							<p class="raceAttr">Attributes</p>
+							<p class="sourceColumn">Source book</p>
+				    </div>
+		        <div class="dTableRow oddRow">
+		          <p class="col1">Language 1</p>
+		          <p class="col2">Attribute Text</p>
+		          <p class="col3">Player's Handbook</p>
+		        </div>
+		        <div class="dTableRow evenRow">
+		          <p class="col1">Language 2</p>
+		          <p class="col2">Attribute Text</p>
+		          <p class="col3">Player's Handbook</p>
+		        </div>
+						<div class="dTableRow oddRow">
+		          <p class="col1">Language 3</p>
+		          <p class="col2">Attribute Text</p>
+		          <p class="col3">Player's Handbook</p>
+		        </div>
+		        <div class="dTableRow evenRow">
+		          <p class="col1">Language 4</p>
+		          <p class="col2">Attribute Text</p>
+		          <p class="col3">Player's Handbook</p>
+		        </div>
+					</div>
+				</div>
+			</div>
+		</div>
+
+		<div class="pageGroup" id="stats" hidden>
+			<div class="page activePage" id="abilityScoresPage">
+				<div id="abilityScoresList">
+					<div class="abilityScore" id="STR">
+						Strength
+						<p>10</p>
+						<div class="abilityScoreMod" id="STR_MOD"><p>0</p></div>
+					</div>
+					<br>
+					<div class="abilityScore" id="DEX">
+						Dexterity
+						<p>11</p>
+						<div class="abilityScoreMod" id="DEX_MOD"><p>+1</p></div>
+					</div>
+					<br>
+					<div class="abilityScore" id="CON">
+						Constitution
+						<p>12</p>
+						<div class="abilityScoreMod" id="CON_MOD"><p>+2</p></div>
+					</div>
+					<br>
+					<div class="abilityScore" id="INT">
+						Intelligence
+						<p>13</p>
+						<div class="abilityScoreMod" id="INT_MOD"><p>+3</p></div>
+					</div>
+					<br>
+					<div class="abilityScore" id="WIS">
+						Wisdom
+						<p>14</p>
+						<div class="abilityScoreMod" id="WIS_MOD"><p>+4</p></div>
+					</div>
+					<br>
+					<div class="abilityScore" id="CHA">
+						Charisma
+						<p>15</p>
+						<div class="abilityScoreMod" id="CHA_MOD"><p>+5</p></div>
+					</div>
+					<br>
+				</div>
+				<div id="abilityScoreModifiers">
+					<!-- TODO: make something that displays anything that modifies the ability scores -->
+				</div>
+			</div>
+			<div class="page" id="skillsPage">
+				<div id="skillDisplay">
+					<h2>Skills</h2>
+					<div class="skillTable">
+						<div class="skillTableHeader">
+							<p>Skill Name</p>
+							<p>Mod</p>
+							<!-- <p>Current Modifier</p> -->
+						</div>
+						<div class="skillGroup" id="strSkills">
+							<div class="skill" id="athletics">
+								<p>Athletics</p>
+								<p class="skillMod" id="athleticsMod">+1</p>
+							</div>
+						</div>
+						<div class="skillGroup" id="dexSkills">
+							<div class="skill" id="acrobatics">
+								<p>Acrobatics</p>
+								<p class="skillMod" id="acrobaticsMod">+1</p>
+							</div>
+							<div class="skill" id="sleight" evenRow>
+								<p>Sleight of Hand</p>
+								<p class="skillMod" id="sleightMod">+2</p>
+							</div>
+							<div class="skill" id="stealth">
+								<p>Stealth</p>
+								<p class="skillMod" id="stealthMod">+3</p>
+							</div>
+						</div>
+						<div class="skillGroup" id="intSkills">
+							<div class="skill" id="arcana">
+								<p>Arcana</p>
+								<p class="skillMod" id="arcanaMod">+1</p>
+							</div>
+							<div class="skill" id="history" evenRow>
+								<p>History</p>
+								<p class="skillMod" id="historyMod">+2</p>
+							</div>
+							<div class="skill" id="investigation">
+								<p>Investigation</p>
+								<p class="skillMod" id="investigationMod">+3</p>
+							</div>
+							<div class="skill" id="nature" evenRow>
+								<p>Nature</p>
+								<p class="skillMod" id="natureMod">+4</p>
+							</div>
+							<div class="skill" id="religion">
+								<p>Religion</p>
+								<p class="skillMod" id="religionMod">+5</p>
+							</div>
+						</div>
+						<div class="skillGroup" id="wisSkills">
+							<div class="skill" id="animalHandle">
+								<p>Animal Handling</p>
+								<p class="skillMod" id="animalHandleMod">+1</p>
+							</div>
+							<div class="skill" id="insight" evenRow>
+								<p>Insight</p>
+								<p class="skillMod" id="insightMod">+2</p>
+							</div>
+							<div class="skill" id="medicine">
+								<p>Medicine</p>
+								<p class="skillMod" id="medicineMod">+3</p>
+							</div>
+							<div class="skill" id="perception" evenRow>
+								<p>Perception</p>
+								<p class="skillMod" id="perceptionMod">+4</p>
+							</div>
+							<div class="skill" id="survival">
+								<p>Survival</p>
+								<p class="skillMod" id="survivalMod">+5</p>
+							</div>
+						</div>
+						<div class="skillGroup" id="chaSkills">
+							<div class="skill" id="deception">
+								<p>Deception</p>
+								<p class="skillMod" id="deceptionMod">+1</p>
+							</div>
+							<div class="skill" id="intimidation" evenRow>
+								<p>Intimidation</p>
+								<p class="skillMod" id="intimidationMod">+2</p>
+							</div>
+							<div class="skill" id="performance">
+								<p>Performance</p>
+								<p class="skillMod" id="performanceMod">+3</p>
+							</div>
+							<div class="skill" id="persuasion" evenRow>
+								<p>Persuasion</p>
+								<p class="skillMod" id="persuasionMod">+4</p>
+							</div>
+						</div>
+						<div id="savesDisplay">
+							<h4>Saving Throws</h4>
+							<div class="savingThrow" id="strSave">
+								<p>Strength</p>
+								<p class="saveMod" id="strSaveMod">0</p>
+							</div>
+							<div class="savingThrow" id="dexSave">
+								<p>Dexterity</p>
+								<p class="saveMod" id="dexSaveMod">+1</p>
+							</div>
+							<div class="savingThrow" id="conSave">
+								<p>Constitution</p>
+								<p class="saveMod" id="conSaveMod">+2</p>
+							</div>
+							<div class="savingThrow" id="intSave">
+								<p>Intelligence</p>
+								<p class="saveMod" id="intSaveMod">+3</p>
+							</div>
+							<div class="savingThrow" id="wisSave">
+								<p>Wisdom</p>
+								<p class="saveMod" id="wisSaveMod">+4</p>
+							</div>
+							<div class="savingThrow" id="chaSave">
+								<p>Charisma</p>
+								<p class="saveMod" id="chaSaveMod">+5</p>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="page" id="featsPage">
+				<div class="tableGroup" id="featTables">
+					<div class="dynamicTable" id="backgroundTable">
+				    <div class="dTableHeader">
+		          <p class="tableName">Feat</p>
+							<p class="raceAttr">Effect</p>
+							<p class="sourceColumn">Source book</p>
+				    </div>
+		        <div class="dTableRow oddRow">
+		          <p class="col1">Feat 1</p>
+		          <p class="col2">Effect Text</p>
+		          <p class="col3">Player's Handbook</p>
+		        </div>
+		        <div class="dTableRow evenRow">
+		          <p class="col1">Feat 2</p>
+		          <p class="col2">Effect Text</p>
+		          <p class="col3">Player's Handbook</p>
+		        </div>
+						<div class="dTableRow oddRow">
+		          <p class="col1">Feat 3</p>
+		          <p class="col2">Effect Text</p>
+		          <p class="col3">Player's Handbook</p>
+		        </div>
+		        <div class="dTableRow evenRow">
+		          <p class="col1">Feat 4</p>
+		          <p class="col2">Effect Text</p>
+		          <p class="col3">Player's Handbook</p>
+		        </div>
+					</div>
+				</div>
+			</div>
+		</div>
+
+		<div class="pageGroup" id="personal" hidden>
+			<div class="page activePage" id="generalInfoPage">
+				<!-- TODO: This page is still a bit messy, but mostly fine. Clean up the naming scheme and look into opimization later -->
+					<h2>Character information</h2>
+					<p>Below are some general pieces of information you can use to briefly describe your character.<br>
+						 Not every option is relevant to every character, so feel free to leave some blank if you feel they are unnecessary.</p>
+					<hr />
+				<div class="contentRow" id="infoRow1">
+					<div class="textField" id="charNameWrapper">
+						<h4>Character Name</h4>
+						<input type="text" name="charName" id="charNameField"/>
+					</div>
+					<div class="textField" id="charAliasWrapper">
+						<h4>Character Aliases</h4>
+						<input type="text" name="charAlias" id="charAliasField"/>
+					</div>
+					<div class="textField" id="genderSelectWrapper">
+						<h4>Gender</h4>
+						<select name="genderField" id="genderSelect" onchange="toggleTextField(this.value == 'other', 'genderTextWrapper')">
+							<option value="male">Male</option>
+							<option value="female">Female</option>>
+							<option value="none">None</option>
+							<option value="other">Other</option>
+						</select>
+					</div>
+				</div>
+				<div class="contentRow" id="infoRow2">
+					<div class="textField" id="alignmentWrapper">
+						<h4>Alignment</h4>
+						<select name="alignment" id="alignmentSelect')">
+							<option value="LG">Lawful Good</option>
+							<option value="NG">Neutral Good</option>
+							<option value="CG">Chaotic Good</option>
+							<option value="LN">Lawful Neutral</option>
+							<option value="NN">True Neutral</option>
+							<option value="CN">Chaotic Neutral</option>
+							<option value="LE">Lawful Evil</option>
+							<option value="NE">Neutral Evil</option>
+							<option value="CE">Chaotic Evil</option>
+						</select>
+					</div>
+					<div class="textField" id="dietyWrapper">
+						<h4>Diety</h4>
+						<input type="text" name="diety" id="dietyField"/>
+					</div>
+					<!-- TODO: Currently on small devices this can be placed far away from the gender
+										 select due to the way I layed out the option in the webpage. -->
+					<div class="textField" id="genderTextWrapper" show="false">
+						<h4>Gender - Other</h4>
+						<input type="text" placeholder="Write in a gender here" name="genderOther" id="genderNameField"/>
+					</div>
+				</div>
+				<div class="appearance">
+					<h2>Appearance</h2>
+					<hr />
+					<div class="contentRow" id="infoRow3">
+						<div class="textField" id="ageWrapper">
+							<h4>Age</h4>
+							<input type="text" name="age" id="ageField"/>
+						</div>
+						<div class="textField" id="heightWrapper">
+							<h4>Height</h4>
+							<input type="text" name="height" id="heightField"/>
+						</div>
+						<div class="textField" id="weightWrapper">
+							<h4>Weight</h4>
+							<input type="text" name="weight" id="weightField"/>
+						</div>
+					</div>
+					<div class="contentRow" id="infoRow4">
+						<div class="textField" id="eyeColorWrapper">
+							<h4>Eye Color</h4>
+							<input type="text" name="eyeColor" id="eyeColorField"/>
+						</div>
+						<div class="textField" id="skinColorWrapper">
+							<h4>Skin Color</h4>
+							<input type="text" name="skinColor" id="skinColorField"/>
+						</div>
+						<div class="textField" id="hairColorWrapper">
+							<h4>Hair Color</h4>
+							<input type="text" name="hairColor" id="hairColorField"/>
+						</div>
+					</div>
+					<!-- General description of their appearance would go here -->
+					<div class="textField" id="appearanceDesc">
+						<h4>Character Description</h4>
+						<p>You can write a general description of your character and their appearance below.<br>
+							 You can also add in a picture of your character by clicking on the icon to the left.</p>
+						<textarea id="appearanceText"></textarea>
+						<div class="characterPicture">
+							<!-- TODO: Add in custom image functionality -->
+							<!-- Currently only the placeholder image is able to be displayed -->
+							<img src="images/Image_placeholder.png" alt="Click here to insert a custom image of your character. Max size: 400 x 300"/>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="page" id="historyPage">
+				<h2>Charcter Mentality</h2>
+				<p>Here you can write about your character's personality traits. You can either use the suggestions provided by
+				  your character's background, or feel to write your own if you feel none of them are a good fit for the character.</p>
+				<hr />
+				<div class="contentRow" id="personalityRow1">
+					<div class="textField" id="personalityTraitsWrapper">
+						<h4>Personality Traits</h4>
+						<textarea id="personalityTraits"></textarea>
+					</div>
+					<div class="textField" id="idealsWrapper">
+						<h4>Ideals</h4>
+						<textarea id="ideals"></textarea>
+					</div>
+				</div>
+				<div class="contentRow" id="personalityRow2">
+					<div class="textField" id="bondsWrapper">
+						<h4>Bonds</h4>
+						<textarea id="bonds"></textarea>
+					</div>
+					<div class="textField" id="flawsWrapper">
+						<h4>Flaws</h4>
+						<textarea id="flaws"></textarea>
+					</div>
+				</div>
+				<h2>Backstory</h2>
+				<p>Your charcter's backstory can go below. Feel free to make write as much or as little as you like, the only one who can
+					 see it is you. This can help you get an idea of how to play the character, and to help you remember any parts you may forget.</p>
+				<hr />
+				<div class="textField" id="historyWrapper">
+					<textarea id="backstory"></textarea>
+				</div>
+			</div>
+			<div class="page" id="relationPage">
+				<h2>Contacts</h2>
+				<button name="addRow" id="addRowButton" onclick="addContactRow()">Add Row</button>
+				<p>This page is here to help you keep track of any family, friends, enemies, organizations, etc your character
+					may know or be a part of, as well as any new ones they may encounter during the course of their adventure.
+					This table is just a general guide meant to aid you, you can feel free to fill is as much or little as you like.<br></p>
+				<button name="hideExplanation" id="hideExplanationButton" onclick="hideContactExplanation()">Hide Explanation</button>
+				<p id="contactsExplanation">The leftmost column tracks the name of the person or organization, the column to its left is
+					for explaining the relationship between the contact and your character, such as sibling, friend, or enemy. The
+					next column to the right is intented to have a brief desciption of the contact, such as what position they are in,
+					where they live, or what they look like. The last column is for any aditional notes about them you may want to keep
+					track of, such as if they were recently injured or are currently traveling with the party. If you need more rows,
+					just click the "Add Row" button above. If you would like to remove a row, click on the red "X" icon to that appears
+					to one the far right of the row.</p>
+				<hr />
+				<div id="contactsTable">
+					<div id="contactsTableHead">
+						<p id="contactsName">Name</p>
+						<p id="contactsRel">Relationship</p>
+						<p id="contactsDesc">Description</p>
+						<p id="contactsMisc">Additional Notes</p>
+					</div>
+					<div class="contact">
+						<input type="text" class="contactName" name="cName1" id="contactName1"/>
+						<input type="text" class="contactRel" name="cRel1" id="contactRel1"/>
+						<textarea class="contactDesc" id="contactDesc1" data-current-size="20"></textarea>
+						<textarea class="contactMisc" id="contactMisc1" data-current-size="20"></textarea>
+						<button class="deleteContactButton" onclick="deleteContact(this.parentElement)">X</button>
+					</div>
+					<div class="contact evenRow">
+						<input type="text" class="contactName" name="cName2" id="contactName2"/>
+						<input type="text" class="contactRel" name="cRel2" id="contactRel2"/>
+						<textarea class="contactDesc" id="contactDesc2" data-current-size="20"></textarea>
+						<textarea class="contactMisc" id="contactMisc2" data-current-size="20"></textarea>
+						<button class="deleteContactButton" onclick="deleteContact(this.parentElement)">X</button>
+					</div>
+					<div class="contact">
+						<input type="text" class="contactName" name="cName3" id="contactName3"/>
+						<input type="text" class="contactRel" name="cRel3" id="contactRel3"/>
+						<textarea class="contactDesc" id="contactDesc3" data-current-size="20"></textarea>
+						<textarea class="contactMisc" id="contactMisc3" data-current-size="20"></textarea>
+						<button class="deleteContactButton" onclick="deleteContact(this.parentElement)">X</button>
+					</div>
+					<div class="contact evenRow">
+						<input type="text" class="contactName" name="cName4" id="contactName4"/>
+						<input type="text" class="contactRel" name="cRel4" id="contactRel4"/>
+						<textarea class="contactDesc" id="contactDesc4" data-current-size="20"></textarea>
+						<textarea class="contactMisc" id="contactMisc4" data-current-size="20"></textarea>
+						<button class="deleteContactButton" onclick="deleteContact(this.parentElement)">X</button>
+					</div>
+					<div class="contact">
+						<input type="text" class="contactName" name="cName5" id="contactName5"/>
+						<input type="text" class="contactRel" name="cRel5" id="contactRel5"/>
+						<textarea class="contactDesc" id="contactDesc5" data-current-size="20"></textarea>
+						<textarea class="contactMisc" id="contactMisc5" data-current-size="20"></textarea>
+						<button class="deleteContactButton" onclick="deleteContact(this.parentElement)">X</button>
+					</div>
+				</div>
+			</div>
+			<div class="page" id="miscPage">
+
+			</div>
+		</div>
+
+	</main>
+
+	<!-- Addes some padding to the bottom of the page to prevent the footer from hiding parts of the page -->
+	<div id="pagePadding"></div>
+
+	<footer>
+		<p>Dummy Footer</p>
+	</footer>
+
+	<script src="jquery-3.6.0.js"></script>
+	<script src="scripts.js"></script>
+</body>
+</html>

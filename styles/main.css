@@ -1,0 +1,803 @@
+/*
+ *
+ *  AUTHOR: Mark Sharp
+ *  Date Created: July 7, 2021
+ *
+*/
+
+/* Font imports */
+/* Current imports: Open Sans, Roboto, Comfortaa */
+/* Disabled while still in development to keep from excessively hitting their server */
+/* @import url('https://fonts.googleapis.com/css2?family=Comfortaa&family=Open+Sans&family=Roboto&Roboto+Condensed&display=swap'); */
+
+* {
+    font-family: Arial, Roboto, Helvetica, sans-serif;
+    margin: 0;
+    padding: 0;
+}
+
+[hidden] { display: none !important; }
+
+/* This background color shouldn't be visable to the user */
+html {
+    background-color: #505050;
+}
+
+/* Controls the header and navbar */
+header {
+  text-align: center;
+  color: white;
+  background-color: #333;
+  padding: 0.5em 0 .5em;
+}
+
+.navbar {
+  position: sticky;
+  z-index: 1;
+  top: 0;
+  height: 96px;
+}
+
+.topnav {
+  overflow: hidden;
+  background-color: #333;
+}
+
+.topnav a {
+  float: left;
+  display: block;
+  color: white;
+  text-align: center;
+  padding: 14px 16px;
+  text-decoration: none;
+  font-size: 17px;
+}
+
+#settings {
+  float: right;
+}
+
+#nav_menu .active {
+  background-color: #0455aa;
+}
+
+.topnav:not(#nav_menu) .active  {
+  background-color: #04AA6D;
+
+  border-style: solid;
+  border-color: #333;
+  /* NOTE: Could break stuff, if getting a random error change it to 1 pixel */
+  border-width: 0.5px 0;
+}
+
+.topnav .icon {
+  display: none;
+}
+
+.dropdown {
+  float: left;
+  overflow: hidden;
+}
+
+.dropdown .dropbtn {
+  font-size: 17px;
+  border: none;
+  outline: none;
+  color: white;
+  padding: 14px 16px;
+  background-color: inherit;
+  font-family: inherit;
+  margin: 0;
+}
+
+.dropdown-content {
+  display: none;
+  position: absolute;
+  background-color: #f9f9f9;
+  min-width: 160px;
+  box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+  z-index: 1;
+}
+
+.dropdown-content a {
+  float: none;
+  color: black;
+  padding: 12px 16px;
+  text-decoration: none;
+  display: block;
+  text-align: left;
+}
+
+.topnav a:hover, .dropdown:hover .dropbtn {
+  background-color: #555;
+}
+
+.dropdown-content a:hover {
+  background-color: #ddd;
+  color: black;
+}
+
+.dropdown:hover .dropdown-content {
+  display: block;
+}
+
+/* Sytling for the main section of the site */
+main {
+  clear: left;
+  padding-top: 1.4em;
+  /* padding-bottom: 1em; */
+  background-color: #505050;
+}
+
+.page {
+  visibility: hidden;
+  display: none;
+}
+
+.activePage {
+  visibility: visible;
+  display: block;
+  margin: 10px 50px;
+  padding: 20px;
+  color: White;
+  min-width: 300px;
+  max-width: 1600px;
+  font-family: Arial, Roboto, Helvetica, monospace;
+
+  background-color: #363535;
+  border-radius: 5px;
+  border: 1px solid black;
+}
+
+/* Character */
+.dynamicTable {
+  margin: 0 20px 1.4em;
+  border: 2px solid #333;
+  max-width: 100%;
+}
+
+.dynamicTable:last-child {
+  margin-bottom: 0;
+}
+
+.dTableHeader {
+  background-color: #363535;
+  color: white;
+  border: 2px solid black;
+}
+
+.dTableHeader, .dTableRow {
+  display: flex;
+  flex-flow: row nowrap;
+}
+
+.dTableHeader p {
+  font-weight: bold;
+}
+
+.dTableHeader p:not(:last-child) {
+  border-right: 2px solid black;
+}
+
+.dTableHeader p, .dTableRow p {
+  padding: 0.2em 0.2em;
+  text-align: center;
+  overflow: hidden;
+  text-overflow: clip;
+  white-space: nowrap
+}
+
+.dTableRow {
+  background-color: white;
+  color: black;
+}
+
+.dTableRow p {
+  /* TODO: Make the fonts consistent. */
+  font-family: Verdana, Helvetica, sans-serif;
+  border-right: 2px solid black;
+  border-bottom: 2px solid black;
+}
+
+.tableName, .col1 {
+  flex: 1 1 auto;
+  min-width: 60px;
+  width: 20%;
+  max-width: 300px;
+}
+
+.raceAttr, .col2 {
+  flex: 3 1 auto;
+  min-width: 100px;
+  width: 65%;
+}
+
+.sourceColumn, .col3 {
+  flex: 1 1 auto;
+  min-width: 60px;
+  width: 20%;
+  max-width: 150px;
+}
+
+.col1 {
+  border-left: 2px solid black;
+}
+.dTableRow {
+    cursor: pointer;
+}
+
+.dTableRow.evenRow {
+  background-color: #e4e4e4;
+}
+
+.dynamicTable > .dTableRow:hover {
+  background-color: #777676;
+}
+
+.dynamicTable > .dTableRow[class$='active'] {
+  background-color: #00c24d;
+}
+
+.dynamicTable > .dTableRow[class$='active']:hover {
+  background-color: #2ddf80;
+}
+
+.dTableRow[chosen="true"] {
+  background-color: #06b94d;
+}
+
+.dTableRow[chosen="true"]:hover {
+  background-color: #2fb56d;
+}
+
+/* Races */
+#abilityScoresPage, #skillsPage {
+  color: black;
+}
+
+/* Ability Scores */
+#abilityScoresPage{
+  /* Nothing here yet */
+}
+
+#abilityScoresList {
+  /* width: 200px; */
+  padding-left: 2em;
+  max-height: 1000px;
+  display: grid;
+  grid-template-columns: 120px;
+  grid-template-rows: repeat(6, 120px minmax(30px,1fr));
+}
+
+.abilityScore {
+  position: relative;
+  text-align: center;
+  background-color: white;
+
+  padding-top: 6px;
+  border: 3px solid black;
+  border-radius: 24px;
+  /* font-weight: bold; */
+  font-size: 20px;
+}
+
+.abilityScore > p {
+  position: relative;
+  left: -2px;
+  font-size: 50px;
+  line-height: 70px;
+  font-family: Roboto, "Open Sans", Helvetica, Tahoma, monospace;
+}
+
+.abilityScoreMod{
+  position: absolute;
+  top: 98px;
+  left: 24px;
+  width: 60px;
+  height: 30px;
+  background-color: inherit;
+  border-radius: 50% 50%;
+  border: 3px solid;
+
+}
+
+.abilityScoreMod > p {
+  position: relative;
+  top: 3px;
+  font-weight: bold;
+  font-size: 20px;
+  font-family: Verdana, Helvetica, sans-serif;
+}
+
+/* Skills */
+/* Controls layout of the entire skill list */
+#skillDisplay {
+  width: 206px;
+  padding: 4px 20px 10px 20px;
+  margin: 0 20px;
+  background-color: white;
+  border: 3px solid black;
+  border-radius: 24px;
+}
+
+#skillDisplay h2 {
+  text-align: center;
+  font-size: 200%;
+  font-family: inherit;
+  font-family: Roboto, Arial, Helvetica, sans-serif;
+}
+
+#savesDisplay {
+  padding: 2px 0px 10px 0;
+  margin-left: 10px;
+  margin-right: 10px;
+  background-color: white;
+}
+
+#savesDisplay h4 {
+  text-align: center;
+  margin-bottom: 2px;
+}
+
+.skillTable {
+  min-width: 200px;
+  max-width: 800px;
+  border-color: black;
+  border: 3px solid;
+  font-size: 110%;
+  font-weight: bold;
+}
+
+.skillTableHeader {
+  font-size: 0;
+  display: block;
+  margin: 10px 10px 0 10px;
+  border: 2px solid black;
+  background-color: #D6D6D6;
+}
+
+.skillTableHeader > p {
+  font-size: 18px;
+  display: inline-block;
+  padding: 2px;
+  /* text-align: center; */
+}
+
+.skillTableHeader > p:first-child {
+  text-align: center;
+  border-right: inherit;
+  width: 140px;
+}
+
+.skillTableHeader > p:last-child {
+  text-overflow: clip;
+  padding: 0px;
+  width: 20px;
+  font-size: 17px;
+  font-weight: normal;
+  font-family: "Roboto Condensed", Arial, Helvetica, sans-serif;
+}
+
+/* Control how Skills are displayed */
+.skillGroup {
+  margin: 0px 10px;
+}
+
+.skill, .savingThrow {
+  border: 2px solid black;
+  border-bottom: none;
+
+  font-family: Roboto, "Open Sans", Helvetica, Tahoma, sans-serif;
+}
+
+.skill:last-child, .savingThrow:last-child {
+  border: 2px solid black;
+}
+
+.skill > p, .savingThrow > p {
+  display: inline-block;
+  padding: 2px;
+
+  font-family: inherit;
+}
+
+.skill > p:first-child, .savingThrow > p:first-child {
+  border-right: inherit;
+  width: 140px;
+}
+
+.skill > p:last-child, .savingThrow > p:last-child {
+  text-align: center;
+  min-width: 20px;
+}
+
+/* Coloring for the skill catagories */
+/* Sheet str colors: CC0000 (dark red), EA3F3F (medium red), FF6A6A (light red), FF8989 (faded red) */
+#strSkills > .skill, #strSave {
+  background-color: #FF6A6A;
+}
+
+/* Sheet dex colors: 3FAF3F (dark green), 6BB748 (medium green), 93C47D (light green), B6D7A8 (faded green) */
+#dexSkills > .skill, #dexSave {
+  background-color: #93C47D;
+}
+
+#dexSkills > .skill[evenRow] {
+  background-color: #B6D7A8;
+}
+
+/* Sheet con colors: E69138 (dark orange), FF9900 (medium orange), F6B26B (light orange), F6CC8E (faded orange) */
+#conSave {
+  background-color: #F6B26B;
+}
+
+/* Sheet int colors: BF9000 (dark yellow), DCA500 (medium yellow), F1C232 (light yellow), FFD966 (faded yellow) */
+#intSkills > .skill, #intSave {
+  background-color: #F1C232;
+}
+
+#intSkills > .skill[evenRow] {
+  background-color: #FFD966;
+}
+
+/* Sheet wis colors: 4E81D1 (dark blue), 5F91E2 (medium blue), 7DA6E7 (light blue), A4C2F4 (faded blue) */
+#wisSkills > .skill, #wisSave {
+  background-color: #7DA6E7;
+}
+
+#wisSkills > .skill[evenRow] {
+  background-color: #A4C2F4;
+}
+
+/* Sheet cha colors: 9E5378 (dark purple), B26E91 (medium purple), CF84AB (light purple), D5A6BD (faded purple) */
+#chaSkills > .skill, #chaSave {
+  background-color: #CF84AB;
+}
+
+#chaSkills > .skill[evenRow] {
+  background-color: #D5A6BD;
+}
+
+/* Personal Characteristics */
+/* General Info */
+/* TODO: This is mostly resolved, some slight issues with spacing on extremely small devices remain but can be resolved later */
+/* NOTE: Margins and text box sizes should be mostly fixed now */
+#personal .page h2 {
+  font-size: 175%;
+  margin-left: 2px;
+}
+
+#personal .page > h2:not(:first-of-type), .appearance > h2 {
+  padding-top: 16px;
+}
+
+#personal p {
+  font-family: "Open Sans", Helvetica, Tahoma, monospace;
+  font-size: 105%; /* Makes the font slightly bigger so that reading it is easier on the eyes */
+}
+
+#personal .page > p {
+  margin-top: 4px;
+  margin-left: 4px;
+}
+
+#personal hr {
+  border: 1px solid #777777;
+  margin: 8px 0 20px;
+}
+
+.contentRow {
+  display: flex;
+  flex-flow: row wrap;
+  justify-content: space-between;
+  margin-bottom: 16px;
+}
+
+#infoRow2 > .textField[show="false"] {
+  visibility: hidden;
+}
+
+#infoRow2 > .textField[show="true"] {
+  visibility: visible;
+}
+
+#placeholder {
+  visibility: hidden;
+}
+
+.textField:not(:last-child){
+  margin-bottom: 4px;
+}
+
+.textField > h4 {
+  margin-left: 2px;
+  margin-bottom: 2px;
+}
+
+/* NOTE: Designed for 1440p and lower screen resolutions, spacing between inputs might be too wide with larger screens */
+.textField input, .textField select, .textField textarea {
+  min-width: 240px;
+  width: 25vw;
+  max-width: 500px;
+}
+
+/* Controls the lower section of the General Information page */
+#appearanceDesc {
+  display: flex;
+  flex-flow: row wrap;
+}
+
+#appearanceDesc h4, #appearanceDesc p {
+  flex-basis: 100%;
+}
+
+#appearanceDesc > textarea {
+  flex: 1 1 auto;
+  width: calc(60vw - 250px);
+  max-width: 1600px;
+  height: 400px;
+}
+
+#appearanceDesc > .characterPicture {
+  flex: 0 0 auto;
+}
+
+#appearanceDesc > p {
+  margin-left: 4px;
+  margin-bottom: 4px;
+}
+
+#appearanceDesc img {
+  width: 300px;
+  height: 400px;
+  border: 1px solid black;
+}
+
+#appearanceDesc img:hover {
+  cursor: pointer;
+}
+
+/* Personal History */
+#historyPage .contentRow {
+  justify-content: flex-start;
+}
+
+#historyPage .textField:not(:last-of-type) {
+  margin-right: 20px;
+}
+
+#historyPage textarea {
+  flex: 1 1 auto;
+  width: 32vw;
+  max-width: 640px;
+  height: auto;
+  max-height: 400px;
+}
+
+#historyWrapper textarea {
+  flex: 1 1 auto;
+  width: 80vw;
+  max-width: 1600px;
+  height: 400px;
+}
+
+/* Relationships */
+#relationPage > h2, #relationPage > button, #relationPage > p:first-of-type {
+  display: inline-block;
+}
+
+#addRowButton {
+  margin: 0px 20px;
+  padding: 2px 10px;
+  float: right;
+}
+
+#hideExplanationButton {
+  margin: 8px 0px;
+  padding: 2px 10px;
+  /* float: right; */
+}
+
+#relationPage #contactsExplanation {
+  font-size: 100%; /* Shrinks the explanation a bit to keep it from taking up a lot of space */
+}
+
+#contactsTableHead {
+  margin-right: 20px;
+}
+
+#contactsTableHead * {
+  flex: 0 0 auto;
+  border: 2px solid black;
+  border-right: 0;
+  height: 20px;
+  text-align: center;
+  text-overflow: clip;
+  overflow: hidden;
+  white-space: nowrap;
+}
+
+#contactsTableHead, .contact {
+  display: flex;
+  flex-flow: row nowrap;
+}
+
+#contactsName, .contact > .contactName {
+  flex: 0 0 auto;
+  min-width: 50px;
+  width: 16%;
+  max-width: 260px;
+  border-left: 2px solid black;
+}
+
+#contactsRel, .contact > .contactRel {
+  flex: 0 0 auto;
+  min-width: 30px;
+  width: 12%;
+  max-width: 180px;
+}
+
+#contactsDesc, .contact > .contactDesc {
+  min-width: 100px;
+  flex: 2 1 auto;
+  width: 32%;
+}
+
+#contactsMisc, .contact > .contactMisc {
+  min-width: 40px;
+  flex: 1 1 auto;
+  width: 20%;
+  max-width: 420px;
+  border-right: 2px solid black;
+}
+
+.contact.evenRow > *, .dTableRow.evenRow {
+  background-color: #e4e4e4;
+}
+
+.contact input, .contact textarea, .deleteContactButton {
+  flex: 1 1 auto;
+  height: 20px;
+  border: 1px;
+  border-bottom: 2px solid black;
+  border-right: 2px solid black;
+}
+
+.deleteContactButton {
+  flex: 0 0 auto;
+  width: 20px;
+  color: red;
+  font-weight: bold;
+  background-color: yellow;
+}
+
+.deleteContactButton:hover {
+  cursor: pointer;
+  background-color: #9f9b2e;
+}
+
+/* For the delete contact buttons */
+.contact.evenRow > *:last-child {
+  background-color: #d7d024;
+}
+
+.contact.evenRow > *:last-child:hover {
+  background-color: #9f9b2e;
+}
+
+/* .submenu a {
+    display: block;
+    min-width: 5vh;
+    /* width: 160px; */
+    /* max-width: 20vh;
+    padding: 1.3em 8px;
+    text-decoration: none;
+    text-align: center;
+    color: black;
+    font-size: 150%;
+    background-color: #a8a8a8;
+
+    border-style: solid;
+    border-color: black;
+    border-width: 0 1px 0 0;
+} */
+
+#pagePadding {
+  width: 100%;
+  height: 1px;
+  margin-top: 3.5em;
+}
+
+/* the styles for the footer section */
+footer{
+  clear: both;
+  text-align: center;
+  color: white;
+  background-color: #333;
+  position: fixed;
+  left: 0;
+  bottom: 0;
+  width: 100%;
+  padding: .5em 0;
+}
+
+/* Additional Styling for various purposes */
+input, select, textarea, img, .deleteContactButton {
+  /* Standardizes the width of the items to be consistent */
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  -ms-box-sizing: border-box;
+  box-sizing: border-box;
+}
+
+/* Needed for the auto-expanding textboxes */
+textarea {
+  overflow-y:hidden;
+  resize: none;
+}
+
+@media screen and (min-width: 2000px) {
+  #historyPage .textField:not(:last-of-type) {margin-right: 168px;}
+}
+
+@media screen and (max-width: 1200px) {
+  /* Nothing here yet */
+}
+
+/* If on a smaller than 720p screen slightly shrink the text box to prevent the image from wrapping to the bottom */
+@media screen and (min-width: 600px) and (max-width: 1200px) {
+  #appearanceDesc > textarea {
+    width: 50vw;
+    height: 300px;
+  }
+   /* If the screen is less than 720p also shrink the image slightly to allow a better fit */
+  #appearanceDesc img {
+    width: 200px;
+    height: 300px;
+  }
+}
+
+@media screen and (min-width: 670px) {
+  #historyPage .textField:not(:last-of-type) {margin-right: 8vw;}
+}
+
+@media screen and (max-width: 600px) {
+  .topnav a:not(.active), .dropdown .dropbtn {display: none;}
+  .topnav a.icon {
+    float: right;
+    display: block;
+  }
+  .topnav.responsive {position: relative;}
+  .topnav.responsive:not(#nav_menu) {top: 0px}
+  .topnav.responsive .icon {
+    position: absolute;
+    right: 0;
+    top: 0;
+  }
+  .topnav.responsive a {
+    float: none;
+    display: block;
+    text-align: left;
+  }
+  .topnav.responsive .dropdown {float: none;}
+  .topnav.responsive .dropdown-content {position: relative;}
+  .topnav.responsive .dropdown .dropbtn {
+    display: block;
+    width: 100%;
+    text-align: left;
+  }
+  #settings {display: none;}
+  .topnav.responsive #settings {
+    float: none;
+    display: block;
+    text-align: left;
+  }
+
+  .dTableHeader > .sourceColumn {white-space:  normal;}
+
+  /* If on a very small screen, make the textbox the full width to avoid further shrinking, the image will be put below */
+  /* TODO: Figure out optimal width */
+  /* 100% can cause it to be slightly too big on extremely small screens, so only use 80% */
+  #appearanceDesc > textarea {width: 80%;}
+  /* No point in shrinkin the image at this point, so leave it as is. */
+}
